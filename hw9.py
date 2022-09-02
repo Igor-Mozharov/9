@@ -6,8 +6,14 @@ phone_book = {'igor': 123,
 def input_error(funk):
     def inner(text_input=None):
         try:
+            if len(text_input.split()) > 3:
+                print('to many parameters')
+                return
+            if len(text_input.split()) == 3:
+                text_input.split()[1] == str(text_input.split()[1])
+                text_input.split()[2] == int(text_input.split()[2])
             return funk(text_input)
-        except:
+        except (AttributeError, IndexError, ValueError, KeyError):
             print('Enter name or phone correctly')
     return inner
 
@@ -21,41 +27,27 @@ def show_all(_=None):
         print(f'{k}:{v}')
 
 
-@input_error
+@ input_error
 def add(text_input: str):
-    text_input.split()[1] == str(text_input.split()[1])
-    text_input.split()[2] == int(text_input.split()[2])
-    if len(text_input.split()) < 4:
-        if text_input.split()[1] not in phone_book:
-            phone_book[text_input.split()[1]] = text_input.split()[2]
-            print('Its done')
-        else:
-            print('This contact is exist')
+    if text_input.split()[1] not in phone_book:
+        phone_book[text_input.split()[1]] = text_input.split()[2]
+        print('Its done')
     else:
-        print('to many parameters')
+        print('This contact is exist')
 
 
-@input_error
+@ input_error
 def change(text_input: str):
-    text_input.split()[1] == str(text_input.split()[1])
-    text_input.split()[2] == int(text_input.split()[2])
-    if len(text_input.split()) < 4:
-        if text_input.split()[1] in phone_book:
-            phone_book[text_input.split()[1]] = text_input.split()[2]
-            print('it was changed')
-        else:
-            print('no contact')
+    if text_input.split()[1] in phone_book:
+        phone_book[text_input.split()[1]] = text_input.split()[2]
+        print('it was changed')
     else:
-        print('to many parameters')
+        print('no contact')
 
 
-@input_error
+@ input_error
 def phone(text_input: str):
-    text_input.split()[1] == str(text_input.split()[1])
-    if len(text_input.split()) < 3:
-        print(phone_book[text_input.split()[1]])
-    else:
-        print('to many parameters')
+    print(phone_book[text_input.split()[1]])
 
 
 USER_INPUT = {
